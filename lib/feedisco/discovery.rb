@@ -30,7 +30,7 @@ module Feedisco
 
           # Check <link> elements
           doc.css('link').each do |link|
-            discovery = complete_extracted_url(link[:href], harmonized_url) if link[:rel] =~ %r{(alternate|service.feed)}i && Feedisco.feed_content_types.include?(link[:type].downcase.strip)
+            discovery = complete_extracted_url(link[:href], harmonized_url) if link[:rel] =~ %r{(alternate|service.feed)}i && !link[:type].nil? && Feedisco.feed_content_types.include?(link[:type].downcase.strip)
             feeds << discovery unless discovery.nil? or feeds.include? discovery
           end
 
